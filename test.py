@@ -1,14 +1,21 @@
 from dataklasses import dataklass
 
-# Example use
-
 
 @dataklass
 class Coordinates:
-    x: int
-    y: int
+    x: float
+    y: float
 
 
-a = Coordinates('3', 2)
-b = Coordinates(2, 3)
-print(a, b)
+# Correct:
+p1 = Coordinates(1, 2)
+p2 = Coordinates(x=1.5, y=5.0)
+
+# Wrong:
+p3 = Coordinates('a', 'b')
+# example.py:15: error: Argument 1 to "Coordinates" has incompatible type "str"; expected "float"
+# example.py:15: error: Argument 2 to "Coordinates" has incompatible type "str"; expected "float"
+
+p4 = Coordinates(a=1, b=2)
+# example.py:19: error: Unexpected keyword argument "a" for "Coordinates"
+# example.py:19: error: Unexpected keyword argument "b" for "Coordinates"
